@@ -1,3 +1,4 @@
+import { SovereignModelHubView } from "./vigyan-hub"
 import { Component, createMemo, createSignal, startTransition } from "solid-js"
 import { Dialog } from "@opencode-ai/ui/v2/dialog-v2"
 import { TabsV2 } from "@opencode-ai/ui/v2/tabs-v2"
@@ -83,6 +84,10 @@ export const DialogSettings: Component<{
                       <Icon name="models" />
                       {language.t("settings.models.title")}
                     </TabsV2.Trigger>
+                    <TabsV2.Trigger value="vigyan-hub">
+                      <Icon name="sparkles" />
+                      {"Sovereign Hub (HF)"}
+                    </TabsV2.Trigger>
                   </div>
                 </div>
               </div>
@@ -107,6 +112,9 @@ export const DialogSettings: Component<{
         </TabsV2.Content>
         <TabsV2.Content value="models" class="settings-v2-panel">
           <SettingsModelsV2 />
+        </TabsV2.Content>
+        <TabsV2.Content value="vigyan-hub" class="settings-v2-panel">
+          <SovereignModelHubView />
         </TabsV2.Content>
       </TabsV2>
     </Dialog>

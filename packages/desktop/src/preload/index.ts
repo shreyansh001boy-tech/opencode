@@ -133,6 +133,18 @@ const api: ElectronAPI = {
   setForceFocus: (enabled) => ipcRenderer.invoke("set-force-focus", enabled),
   recordFatalRendererError: (error) => ipcRenderer.invoke("record-fatal-renderer-error", error),
   setNativeTranslations: (bundle) => ipcRenderer.invoke("set-native-translations", bundle),
+  vigyan: {
+    listCatalog: () => ipcRenderer.invoke("vigyan-list-catalog"),
+    downloadModel: (modelId: string, filename?: string) => ipcRenderer.invoke("vigyan-download-model", modelId, filename),
+    cancelDownload: (modelId: string) => ipcRenderer.invoke("vigyan-cancel-download", modelId),
+    onDownloadProgress: (cb: (data: any) => void) => {
+      const handler = (_: unknown, data: any) => cb(data)
+      ipcRenderer.on("vigyan-download-progress", handler)
+      return () => ipcRenderer.removeListener("vigyan-download-progress", handler)
+    },
+    runOffline: (modelId: string) => ipcRenderer.invoke("vigyan-run-offline", modelId),
+    getStatus: () => ipcRenderer.invoke("vigyan-get-status"),
+  },
 }
 
 contextBridge.exposeInMainWorld("api", api)

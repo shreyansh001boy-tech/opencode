@@ -113,4 +113,12 @@ export type ElectronAPI = {
   setForceFocus: (enabled: boolean) => Promise<void>
   recordFatalRendererError: (error: FatalRendererError) => Promise<void>
   setNativeTranslations: (bundle: DesktopNativeBundle) => Promise<void>
+  vigyan: {
+    listCatalog: () => Promise<any[]>
+    downloadModel: (modelId: string, filename?: string) => Promise<{ success: boolean; message: string }>
+    cancelDownload: (modelId: string) => Promise<boolean>
+    onDownloadProgress: (cb: (progress: any) => void) => () => void
+    runOffline: (modelId: string) => Promise<{ success: boolean; endpoint: string; message: string }>
+    getStatus: () => Promise<{ ollamaActive: boolean; llamaServerActive: boolean; activeRunner: string }>
+  }
 }

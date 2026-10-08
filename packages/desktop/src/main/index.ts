@@ -1,3 +1,4 @@
+import { registerVigyanModelHubIpc } from "./vigyan-model-hub"
 import { randomUUID } from "node:crypto"
 import { mkdirSync, rmSync } from "node:fs"
 import * as http from "node:http"
@@ -280,6 +281,7 @@ const main = Effect.gen(function* () {
     checkForUpdates: () => void showUpdaterDialog(updater, true),
     relaunch,
   }
+  registerVigyanModelHubIpc()
   registerIpcHandlers({
     killSidecar: () => killSidecar(),
     relaunch,
